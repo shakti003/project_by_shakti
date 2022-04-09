@@ -1,0 +1,29 @@
+const obj = {
+    userId : req.body.userId,
+    name : req.body.name,
+    email : req.body.email,
+    password : req.body.password,
+    dob : req.body.dob,
+    isAdmin : req.body.isAdmin,
+    image : {
+        data : fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.file.filename)).toString('base64'),
+        contentType : 'image/png',
+    }
+
+}
+UserData.create(obj ,(err,item) =>{
+    if(err){
+        console.log(err);
+    }else{
+        const data = item.save();
+        res.send(data)
+    }
+})
+
+
+//Define a JSON object for the image
+    const finalImag = {
+        //     contentType : req.file.mimetype,
+        //     path : req.file.path,
+        //     image : new Buffer.from(encode_image, "base64")
+        // }
